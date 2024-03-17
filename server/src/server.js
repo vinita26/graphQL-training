@@ -1,9 +1,13 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone';
 import resolvers from './resolver.js';
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 
 // types
-import { typeDefs } from './schema.js'
+const typeDefs = loadSchemaSync('./**/*.graphql', {
+  loaders: [new GraphQLFileLoader()],
+});
 
 // server setup
 const server = new ApolloServer({

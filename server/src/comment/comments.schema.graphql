@@ -1,0 +1,36 @@
+type Comment {
+    id:ID!,
+    postId:Int,
+    email:String,
+    name:String,
+    body:String,
+}
+
+type Query {
+    comments:[Comment],
+    comment(id:ID!):Comment,
+    commentsByPostId(postId: String): [Comment]
+}
+
+
+  input createCommentInput{
+    id:ID!,
+    postId:Int,
+    email: String,
+    name:String,
+    body:String
+  }
+
+  input updateCommentInput{
+    id:ID!,
+    postId:Int,
+    email: String,
+    name:String,
+    body:String
+  }
+
+type Mutation {
+    createComment(comment: createCommentInput!) : Comment,
+    updateComment(comment: updateCommentInput!) : Comment,
+    deleteComment(id:ID!) : [Comment]
+  }

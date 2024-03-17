@@ -1,0 +1,13 @@
+type Photo {
+  id:ID!,
+  albumId:Int,
+  title:String,
+  url:String,
+  thumbnailUrl:String,
+}
+
+type Query {
+    photos:[Photo],
+    photo(id:ID!):Photo,
+    photosByAlbumId(albumId: String): [Photo]
+}
