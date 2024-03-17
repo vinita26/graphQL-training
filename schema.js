@@ -4,6 +4,9 @@ type User {
     id:ID!,
     name:String,
     username:String,
+    posts:[Post!],
+    todos:[Todo!],
+    albums:[Album!]
 }
 
 type Post {
@@ -11,6 +14,7 @@ type Post {
     userId:Int,
     title:String,
     body:String,
+    comments:[Comment!]
 }
 
 type Comment {
@@ -19,6 +23,28 @@ type Comment {
     email:String,
     name:String,
     body:String,
+}
+
+type Photo {
+  id:ID!,
+  albumId:Int,
+  title:String,
+  url:String,
+  thumbnailUrl:String,
+}
+
+type Album {
+  id:ID!,
+  userId:Int,
+  title:String,
+  photos:[Photo!]
+}
+
+type Todo {
+  id:ID!,
+  userId:Int,
+  title:String,
+  completed:String,
 }
 
 type Query {
@@ -30,9 +56,20 @@ type Query {
     user(id:ID!):User ,
     posts:[Post],
     post(id:ID!):Post,
-    postByUserId(userId:ID!):[Post],
+    postsByUserId(userId: String): [Post],
     comments:[Comment],
     comment(id:ID!):Comment,
+    commentsByPostId(postId: String): [Comment],
+    todos:[Todo],
+    todo(id:ID!):Todo,
+    todosByUserId(userId: String): [Todo],
+    photos:[Photo],
+    photo(id:ID!):Photo,
+    photosByAlbumId(albumId: String): [Photo],
+    albums:[Album],
+    album(id:ID!):Album,
+    albumsByUserId(userId: String): [Album],
+
 }
 
 input createUserInput{
